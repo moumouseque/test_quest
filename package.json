@@ -1,0 +1,22 @@
+{
+  "name": "test_app",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "@kadira/storybook": "^2.35.3",
+    "react-scripts": "0.9.5",
+    "styletron-react": "^2.5.3"
+  },
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-tabs": "^0.8.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 9001 .storybook -s ./public"
+  }
+}
