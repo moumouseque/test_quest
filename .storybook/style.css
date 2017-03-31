@@ -1,0 +1,14 @@
+body {
+  font-family: "Roboto", "Arial", sans-serif;
+  padding: 20px;
+}
+
+.tab-panel {
+  width: 609px;
+}
+
+.details-area {
+  position: relative;
+  top: -190px;
+  width: 915px;
+}
