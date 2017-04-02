@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {styled} from 'styletron-react';
+import UiSelect from './ui/UiSelect';
 
 const StyledMortgage = styled('div', {
   padding: '16px 20px 40px 20px'
@@ -67,24 +68,20 @@ const CostInput = styled('input', {
   border: 'solid 1px #c8c8c8',
 })
 
-const StyledFormSelect = styled('select', {
-  padding: '6px 27px 6px 15px',
-  fontFamily: 'inherit',
-  color: '#323232',
-  border: 'solid 1px #c8c8c8',
-  borderRadius: '3px',
-  backgroundRepeat: 'no-repeat',
-  backgroundPosition: 'right 10px top 13px',
-  backgroundColor: '#ffffff',
-  backgroundSize: '9px 5px',
-  backgroundImage: 'url("data:image/svg+xml,' +
-    '<svg xmlns=\'http://www.w3.org/2000/svg\'>' +
-      '<g stroke=\'#232323\' stroke-width=\'1\'>' +
-        '<line x1=\'0\' y1=\'0\' x2=\'4.2\' y2=\'4.3\' />' +
-        '<line x1=\'4.2\' y1=\'4.3\' x2=\'8.4\' y2=\'0\' />' +
-      '</g>' +
-    '</svg>")',
-  appearance: 'none'
+const CreditProgram = styled('div', {
+  width: '120px'
+});
+
+const CreditBank = styled('div', {
+  width: '100px'
+});
+
+const CreditTerm = styled('div', {
+  width: '100px'
+});
+
+const CreditPrefirential = styled('div', {
+  width: '120px'
 });
 
 const CreditAmount = styled('p', {
@@ -303,31 +300,47 @@ class Mortgage extends Component {
             </TopFormRow>
             <TopFormRow>
               <FormItem>Программа кредитования</FormItem>
-              <StyledFormSelect>
-                <option>Новостройка</option>
-                <option>Вторичка</option>
-              </StyledFormSelect>
+              <CreditProgram>
+                <UiSelect 
+                  options={[
+                    { value: 'one', label: 'Новостройка' },
+                    { value: 'two', label: 'Вторичка' }
+                  ]}
+                />
+              </CreditProgram>
             </TopFormRow>
             <TopFormRow>
               <FormItem>Банк</FormItem>
-              <StyledFormSelect>
-                <option>ВТБ</option>
-                <option>Сбербанк</option>
-              </StyledFormSelect>
+              <CreditBank>
+                <UiSelect 
+                  options={[
+                    { value: 'one', label: 'ВТБ' },
+                    { value: 'two', label: 'Сбербанк' }
+                  ]}
+                />
+              </CreditBank>
             </TopFormRow>
             <TopFormRow>
               <FormItem>Срок кредита</FormItem>
-              <StyledFormSelect>
-                <option>3 года</option>
-                <option>30 лет</option>
-              </StyledFormSelect>
+              <CreditTerm>
+                <UiSelect 
+                  options={[
+                    { value: 'one', label: '3 года' },
+                    { value: 'two', label: '30 лет' }
+                  ]}
+                />
+              </CreditTerm>
             </TopFormRow>
             <TopFormRow>
               <FormItem>Льготные категории</FormItem>
-              <StyledFormSelect>
-                <option>Отсуствуют</option>
-                <option>Присуствуют</option>
-              </StyledFormSelect>
+              <CreditPrefirential>
+                <UiSelect 
+                  options={[
+                    { value: 'one', label: 'Отсуствуют' },
+                    { value: 'two', label: 'Присуствуют' }
+                  ]}
+                />
+              </CreditPrefirential>
             </TopFormRow>
           </TopForm>
           <CreditAmount>Объем кредита: 10% — 14 898 906 &#8381;</CreditAmount>

@@ -28,7 +28,8 @@ const TabAddBtn = styled('a', {
   fontWeight: '400',
   color: '#4a4a4a',
   border: 'solid 1px #e2e2e2',
-  borderRadius: '2px'
+  borderRadius: '2px',
+  cursor: 'pointer'
 });
 
 const SearchFilter = styled('ul', {

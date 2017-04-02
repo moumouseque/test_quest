@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {styled} from 'styletron-react';
 import DetailsArea from './DetailsArea';
 import { addIconMini, downloadIcon, editIcon, selectBlackArrow, selectWhiteArrow } from './SvgImages';
+import UiSelect from './ui/UiSelect';
 
 const ContactWrapper = styled('div', {
   display: 'flex',
@@ -39,18 +40,14 @@ const TopInfo = styled('div', {
   alignItems: 'center'
 });
 
-const StyledSelect = styled('select', {
-  marginRight: '10px',
-  padding: '4px 21px 4px 8px',
-  fontFamily: 'inherit',
-  color: 'inherit',
-  border: 'solid 1px #d2d2d2',
-  borderRadius: '2px',
-  background: 'no-repeat right 8px top 9px',
-  backgroundColor: '#ffffff',
-  backgroundSize: '9px 5px',
-  backgroundImage: `url(${selectBlackArrow})`,
-  appearance: 'none'
+const DealStatus = styled('div', {
+  width: '104px',
+  marginRight: '10px'
+});
+
+const ContractStatus = styled('div', {
+  width: '154px',
+  marginRight: '10px'
 });
 
 const ContactMenu = styled('ul', {
@@ -232,16 +229,23 @@ class Contact extends Component {
         <StyledContact>
           <TopRow>
             <TopInfo>
-              <StyledSelect>
-                <option>
-                  Идет сделка
-                </option>
-              </StyledSelect>
-              <StyledSelect>
-                <option>
-                  Договор не заключен
-                </option>
-              </StyledSelect>
+              <DealStatus>
+                <UiSelect 
+                  little={true}
+                  options={[
+                    { value: 'two', label: 'Идет сделка' }
+                  ]}
+                />
+              </DealStatus>
+              <ContractStatus>
+                <UiSelect 
+                  little={true}
+                  options={[
+                    { value: 'one', label: 'Договор не заключен' },
+                    { value: 'two', label: 'Договор заключен' }
+                  ]}
+                />
+              </ContractStatus>
               <ContactMenu>
                 <ContactMenuItem>Продавец</ContactMenuItem>
                 <ContactMenuItem>Покупатель</ContactMenuItem>

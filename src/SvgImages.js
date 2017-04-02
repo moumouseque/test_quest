@@ -71,3 +71,24 @@ export const selectWhiteArrow = '"data:image/svg+xml,' +
       '<line x1=\'4.2\' y1=\'4.3\' x2=\'8.4\' y2=\'0\' />' +
   '</g>' +
   '</svg>"';
+
+export const selectBlackArrowLittleDown = '"data:image/svg+xml,' +
+  '<svg xmlns=\'http://www.w3.org/2000/svg\'>' +
+    '<polyline points=\'0,0 5,5 9,0\' stroke=\'#323232\' stroke-width=\'1\' fill=\'none\'></polyline>' +
+  '</svg>"';
+
+export const selectBlackArrowLittleUp = '"data:image/svg+xml,' +
+  '<svg xmlns=\'http://www.w3.org/2000/svg\'>' +
+    '<polyline points=\'0,5 5,0 9,5\' stroke=\'#323232\' stroke-width=\'1\' fill=\'none\'></polyline>' +
+  '</svg>"';
+
+export const selectBlackArrowBigUp = '"data:image/svg+xml,' +
+  '<svg xmlns=\'http://www.w3.org/2000/svg\'>' +
+    '<polyline points=\'0,0 6,6 11,0\' stroke=\'#323232\' stroke-width=\'1\' fill=\'none\'></polyline>' +
+  '</svg>"';
+
+export const selectBlackArrowBigDown = '"data:image/svg+xml,' +
+  '<svg xmlns=\'http://www.w3.org/2000/svg\'>' +
+    '<polyline points=\'0,6 6,0 11,6\' stroke=\'#323232\' ' +
+    'stroke-width=\'1\' fill=\'none\'></polyline>' +
+  '</svg>"';
