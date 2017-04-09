@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import {styled} from 'styletron-react';
 import DetailsArea from './DetailsArea';
+import ContactEdit from './ContactEdit';
+import AddActivity from './AddActivity';
 import { addIconMini, downloadIcon, editIcon, selectBlackArrow, selectWhiteArrow } from './SvgImages';
 import UiSelect from './ui/UiSelect';
 
 const ContactWrapper = styled('div', {
+  position: 'relative',
   display: 'flex',
   alignItems: 'center'
 });
@@ -66,11 +69,12 @@ const ContactMenuItem = styled('li',{
 });
 
 const ContactActions = styled('div', {
+  position: 'relative',
   display: 'flex',
   alignItems: 'center',
 });
 
-const ContactAction = styled('a', {
+const ContactAddAction = styled('a', {
   position: 'relative',
   padding: '5px 9px 5px 26px',
   borderRadius: '2px',
@@ -139,6 +143,7 @@ const Contacts = styled('div', {
 });
 
 const ContactsItem = styled('div', {
+  position: 'relative',
   paddingRight: '25px'
 });
 
@@ -165,6 +170,17 @@ const ContactsContent = styled('p', {
   lineHeight: '18px',
   fontWeight: '400'
 });
+
+const AllPhones = styled('div', (props) => ({
+  position: 'absolute',
+  top: '17px',
+  left: '-10px',
+  display: props.open ? 'block' : 'none',
+  padding: '0 9px 9px 9px',
+  backgroundColor: '#fff',
+  border: '1px solid #e1e1e1',
+  borderRadius: '2px'
+}));
 
 const Info = styled('div', {
   fontSize: '12px',
@@ -209,9 +225,14 @@ const InfoDetail = styled('a', (props) => ({
 class Contact extends Component {
   constructor(props){
     super(props);
-    this.state = { detailedArea: {
-      expanded: false
-    }}
+    this.state = {
+      detailedArea: {
+        expanded: false
+      },
+      editIsOpen: false,
+      addActivityIsOpen: false,
+      AllPhones: false
+    };
   }
 
   toggleDetailedArea() {
@@ -219,6 +240,40 @@ class Contact extends Component {
       detailedArea: {
         expanded: !this.state.detailedArea.expanded
       }
+    })
+  }
+
+  openEdit() {
+    this.setState({editIsOpen: true});
+  }
+
+  closeEdit() {
+    this.setState({editIsOpen: false});
+  }
+
+  openAddActivity() {
+    this.setState({addActivityIsOpen: true});
+  }
+
+  closeAddActivity() {
+    this.setState({addActivityIsOpen: false});
+  }
+
+  toAbbreviatedName(name) {
+    return (
+      name.split(' ')
+      .map((word, index) => {
+        return (
+          index !== 2 ? word.slice(0, 1).concat('.') : word
+        )
+      })
+      .join(' ')
+    )
+  }
+
+  allPhonesOpen() {
+    this.setState({
+      allPhonesOpen: !this.state.allPhonesOpen
     })
   }
 
@@ -230,21 +285,22 @@ class Contact extends Component {
           <TopRow>
             <TopInfo>
               <DealStatus>
+                {this.props.client.status && (this.props.clientStatuses.length !== 0) &&
                 <UiSelect 
                   little={true}
-                  options={[
-                    { value: 'two', label: 'Идет сделка' }
-                  ]}
+                  value={this.props.client.status}
+                  options={this.props.clientStatuses}
                 />
+                }
               </DealStatus>
               <ContractStatus>
+                {this.props.client.dealStatus && (this.props.dealStatuses.length !== 0) &&
                 <UiSelect 
                   little={true}
-                  options={[
-                    { value: 'one', label: 'Договор не заключен' },
-                    { value: 'two', label: 'Договор заключен' }
-                  ]}
+                  value={this.props.client.dealStatus}
+                  options={this.props.dealStatuses}
                 />
+                }
               </ContractStatus>
               <ContactMenu>
                 <ContactMenuItem>Продавец</ContactMenuItem>
@@ -254,32 +310,57 @@ class Contact extends Component {
               </ContactMenu>
             </TopInfo>
             <ContactActions>
-              <ContactAction>Действие</ContactAction>
+              <ContactAddAction onClick={this.openAddActivity.bind(this)} >
+                Действие
+              </ContactAddAction>
+              {this.state.addActivityIsOpen && <AddActivity
+                isOpen={this.state.addActivityIsOpen}
+                onClose={this.closeAddActivity.bind(this)}
+              />}
               <ContactActionDownload />
-              <ContactActionEdit />
+              <ContactActionEdit onClick={this.openEdit.bind(this)} />
+              {this.state.editIsOpen && <ContactEdit
+                clientId={this.props.client.id}
+                isOpen={this.state.editIsOpen}
+                onClose={this.closeEdit.bind(this)}
+              />}
             </ContactActions>
           </TopRow>
-          <AbbreviatedName>К. К. Константинопольский</AbbreviatedName>
-          <FullName>Константин Константинополев Константинопольский</FullName>
+          <AbbreviatedName>{this.props.client.name && this.toAbbreviatedName(this.props.client.name)}</AbbreviatedName>
+          <FullName>{this.props.client.name}</FullName>
           <BottomRow>
             <Contacts>
               <ContactsItem>
                 <ContactsTitle>Телефон</ContactsTitle>
-                <ContactsShowAll>показать все</ContactsShowAll>
-                <ContactsContent>+7 953 344-34-43</ContactsContent>
+                <ContactsShowAll
+                  onClick={this.allPhonesOpen.bind(this)}
+                >
+                  показать все
+                </ContactsShowAll>
+                <ContactsContent>{this.props.client.phones && this.props.client.phones[0]}</ContactsContent>
+                {this.props.client.phones &&
+                  <AllPhones
+                    open={this.state.allPhonesOpen}
+                    onMouseLeave={this.allPhonesOpen.bind(this)}
+                  >
+                    {this.props.client.phones.map((phone, index) => (
+                      <ContactsContent key={index}>{phone}</ContactsContent>
+                    ))}
+                  </AllPhones>
+                }
               </ContactsItem>
               <ContactsItem>
                 <ContactsTitle>Эл. почта</ContactsTitle>
-                <ContactsContent>konstantinopolev@mail.ru</ContactsContent>
+                <ContactsContent>{this.props.client.email}</ContactsContent>
               </ContactsItem>
               <ContactsItem>
                 <ContactsTitle>Сотрудник</ContactsTitle>
-                <ContactsContent>К.К. Константинопольский</ContactsContent>
+                <ContactsContent>{this.props.client.broker}</ContactsContent>
               </ContactsItem>
             </Contacts>
             <Info>
               <InfoFrom>Из лида</InfoFrom>
-              <InfoUpdateDate>Обновлен 5 мая</InfoUpdateDate>
+              <InfoUpdateDate>Обновлен {this.props.client.updateDate}</InfoUpdateDate>
               <InfoDetail
                 onClick={this.toggleDetailedArea.bind(this)}
                 expanded={this.state.detailedArea.expanded}

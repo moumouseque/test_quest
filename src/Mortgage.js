@@ -301,7 +301,8 @@ class Mortgage extends Component {
             <TopFormRow>
               <FormItem>Программа кредитования</FormItem>
               <CreditProgram>
-                <UiSelect 
+                <UiSelect
+                  value={'one'}
                   options={[
                     { value: 'one', label: 'Новостройка' },
                     { value: 'two', label: 'Вторичка' }
@@ -313,6 +314,7 @@ class Mortgage extends Component {
               <FormItem>Банк</FormItem>
               <CreditBank>
                 <UiSelect 
+                  value={'one'}
                   options={[
                     { value: 'one', label: 'ВТБ' },
                     { value: 'two', label: 'Сбербанк' }
@@ -323,7 +325,8 @@ class Mortgage extends Component {
             <TopFormRow>
               <FormItem>Срок кредита</FormItem>
               <CreditTerm>
-                <UiSelect 
+                <UiSelect
+                  value={'one'}
                   options={[
                     { value: 'one', label: '3 года' },
                     { value: 'two', label: '30 лет' }
@@ -334,7 +337,8 @@ class Mortgage extends Component {
             <TopFormRow>
               <FormItem>Льготные категории</FormItem>
               <CreditPrefirential>
-                <UiSelect 
+                <UiSelect
+                  value={'one'}
                   options={[
                     { value: 'one', label: 'Отсуствуют' },
                     { value: 'two', label: 'Присуствуют' }

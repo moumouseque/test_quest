@@ -1,0 +1,18 @@
+.styledCheckbox {
+  position: relative;
+}
+
+.styledCheckbox:checked::before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 2px;
+  display: block;
+  width: 15px;
+  height: 15px;
+  background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='none' stroke='%23FFF' d='M0 3l3 3 6-6'/%3E%3C/svg%3E") no-repeat;
+}
+
+.placeholder {
+  color: #9b9b9b;
+}

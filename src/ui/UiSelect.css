@@ -49,14 +49,14 @@
   border-color: #b3b3b3 #ccc #d9d9d9;
 }
 .is-open > .Select-control .Select-arrow {
-  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg\'><polyline points='1,5 6,1 10,5' stroke='#323232' stroke-width='1' fill='none'></polyline></svg>");
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg\'><polyline points='1,5 6,1 10,5' stroke='%23323232' stroke-width='1' fill='none'></polyline></svg>");
 }
 
 .Select-placeholder,
 .Select--single > .Select-control .Select-value {
   bottom: 0;
   left: 0;
-  padding-left: 10px;
+  padding-left: 6px;
   padding-right: 10px;
   position: absolute;
   right: 0;
@@ -82,6 +82,7 @@
   text-align: center;
   width: 20px;
   vertical-align: middle;
+  padding-top: 3px;
   padding-right: 6px;
   padding-left: 6px;
 }
@@ -91,7 +92,7 @@
   width: 11px;
   height: 6px;
   background: no-repeat center;
-  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg\'><polyline points='1,1 6,5 10,1' stroke='#323232' stroke-width='1' fill='none'></polyline></svg>");
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg\'><polyline points='1,1 6,5 10,1' stroke='%23323232' stroke-width='1' fill='none'></polyline></svg>");
   position: relative;
 }
 
@@ -148,7 +149,7 @@
   width: 14px;
   height: 11px;
   background: no-repeat center;
-  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg\'><polyline points='1,6 5,10 13,1' stroke='#fff' stroke-width='1' fill='none'></polyline></svg>");
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg\'><polyline points='1,6 5,10 13,1' stroke='%23fff' stroke-width='1' fill='none'></polyline></svg>");
 }
 
 .Select-option.is-focused {

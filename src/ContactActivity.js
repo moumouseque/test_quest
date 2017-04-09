@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { styled } from 'styletron-react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as ActivitiesActions from './actions/ActivitiesActions';
 import { editIcon, deleteIcon } from './SvgImages';
 
 const  StyledContactActivity = styled('div', {
@@ -81,14 +84,14 @@ const ActivityStatus = styled('td', {
   width: '11px'
 });
 
-const ActivityStatusIcon = styled('span', {
+const ActivityStatusIcon = styled('span', props => ({
   display: 'block',
   width: '11px',
   height: '11px',
   fontSize: '0',
-  backgroundColor: '#eb8da5',
+  backgroundColor: props.color,
   borderRadius: '50%'
-});
+}));
 
 const ActivityName = styled('td', {
   padding: '15px 0',
@@ -138,6 +141,30 @@ const CalendarLink = styled('a', {
 });
 
 class ContactActivity extends Component {
+  constructor(props){
+    super(props);
+    this.state = { activeFilter: 0 }
+  }
+
+  componentDidMount() {
+    this.props.fetchGetActivities();
+  }
+
+  activitiesCount() {
+    let count = { plan: 0, done: 0 }
+    this.props.activities.map(activity => {
+      return (
+        activity.done === false ?
+        {...count, plan: count.plan++} :
+        {...count, done: count.done++}
+    )})
+    return count;
+  }
+
+  onFilterClick(filterIndex) {
+    this.setState({ activeFilter: filterIndex });
+  }
+
   render() {
     return (
       <StyledContactActivity>
@@ -146,39 +173,42 @@ class ContactActivity extends Component {
           <TabAddBtn>Добавить действие</TabAddBtn>
         </TabTitleRow>
         <ActivityFilter>
-          <ActivityFilterItem active>
+          <ActivityFilterItem
+            active={this.state.activeFilter === 0}
+            onClick={this.onFilterClick.bind(this, 0)}
+          >
             Запланированы
-            <ActivityFilterCount>1</ActivityFilterCount>
+            <ActivityFilterCount>
+              {this.activitiesCount().plan}
+            </ActivityFilterCount>
           </ActivityFilterItem>
-          <ActivityFilterItem>
+          <ActivityFilterItem
+            active={this.state.activeFilter === 1}
+            onClick={this.onFilterClick.bind(this, 1)}
+          >
             Выполнены
-            <ActivityFilterCount>0</ActivityFilterCount>
+            <ActivityFilterCount>
+              {this.activitiesCount().done}
+            </ActivityFilterCount>
           </ActivityFilterItem>
         </ActivityFilter>
         <ActivityList>
           <tbody>
-            <Activity>
-              <ActivityStatus>
-                <ActivityStatusIcon>Статус</ActivityStatusIcon>
-              </ActivityStatus>
-              <ActivityName>Исходящий звонок</ActivityName>
-              <ActivityDate>1 апреля 10:15</ActivityDate>
-              <ActivityIcons>
-                <EditIcon />
-                <DeleteIcon />
-              </ActivityIcons>
-            </Activity>
-            <Activity>
-              <ActivityStatus>
-                <ActivityStatusIcon>Статус</ActivityStatusIcon>
-              </ActivityStatus>
-              <ActivityName>Исходящий звонок</ActivityName>
-              <ActivityDate>1 апреля 10:15</ActivityDate>
-              <ActivityIcons>
-                <EditIcon />
-                <DeleteIcon />
-              </ActivityIcons>
-            </Activity>
+            {this.props.activities.map( activity => {
+              return (
+                <Activity key={activity.id}>
+                  <ActivityStatus>
+                    <ActivityStatusIcon color={activity.type_color} />
+                  </ActivityStatus>
+                  <ActivityName>{activity.name}</ActivityName>
+                  <ActivityDate>{activity.date}</ActivityDate>
+                  <ActivityIcons>
+                    <EditIcon />
+                    <DeleteIcon />
+                  </ActivityIcons>
+                </Activity>
+              )
+            })}
           </tbody>
         </ActivityList>
         <CalendarLink>Посмотреть действия в календаре</CalendarLink>
@@ -187,4 +217,12 @@ class ContactActivity extends Component {
   }
 }
 
-export default ContactActivity
+function mapStateToProps(state) {
+  return { activities: state.activities.activitiesList }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(ActivitiesActions, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactActivity);

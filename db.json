@@ -1,0 +1,46 @@
+{
+  "activities": [
+    { "id": 1,
+      "type_color": "#eb8da5",
+      "name": "Исходящий звонок",
+      "date": "1 апреля 10:15",
+      "done": false
+    },
+    { "id": 2,
+      "type_color": "#eb8da5",
+      "name": "Исходящий звонок",
+      "date": "1 апреля 10:15",
+      "done": false
+    }
+  ],
+  "clients": [
+    {
+      "id": 1,
+      "name": "Константин Константинополев Константинопольский",
+      "type": "Продавец",
+      "phones":
+        [
+          "+7 982 234 43 43",
+          "+7 945 234 98 01"
+        ],
+      "broker": "К.К. Константинопольский",
+      "updateDate": "5 мая",
+      "status": 2,
+      "dealStatus": 2,
+      "email": "konstantinopolev@mail.ru"
+    }
+  ],
+  "clientStatuses":
+    [
+      { "value": 1, "label": "Неактивный" },
+      { "value": 2, "label": "Холодный" },
+      { "value": 3, "label": "Теплый" },
+      { "value": 4, "label": "Горячий" },
+      { "value": 5, "label": "Идет сделка" }
+    ],
+  "dealStatuses":
+    [
+      { "value": 1, "label": "Договор не заключен" },
+      { "value": 2, "label": "Договор подписан" }
+    ]
+}

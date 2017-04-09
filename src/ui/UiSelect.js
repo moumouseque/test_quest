@@ -7,8 +7,9 @@ class UiSelect extends Component {
   constructor(props) {
     super(props);
     this.options = this.props.options;
+    this.name = this.props.name;
     this.state = {
-      value: this.options[0].value
+      value: this.props.value
     }
   }
 
@@ -20,6 +21,12 @@ class UiSelect extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      value: nextProps.value
+    })
+  }
+
   onChange(value) {
     this.setState({ value: value })
   }
@@ -27,11 +34,16 @@ class UiSelect extends Component {
   render() {
     return (
       <Select
+        name={this.name}
         options={this.options}
-        value={this.state.value}
+        value={this.props.onChange ? this.props.value : this.state.value}
         clearable={false}
+        placeholder={this.props.placeholder}
+        valueComponent={this.props.valueComponent}
         searchable={false}
-        onChange={this.onChange.bind(this)}
+        onChange={this.props.onChange || this.onChange.bind(this)}
+        onInputChange={this.props.onInputChange}
+        arrowRenderer={this.props.arrowRenderer}
       />
     )
   }
