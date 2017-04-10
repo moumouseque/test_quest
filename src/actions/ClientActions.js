@@ -10,7 +10,7 @@ export function getClient(client) {
 
 export function fetchGetClient() {
   return dispatch => {
-    fetch('https://demo1896123.mockable.io/clients')
+    fetch( process.env.NODE_ENV !== 'production' ? 'http://localhost:3004/clients' : 'https://demo1896123.mockable.io/clients')
     .then(response => response.json())
     .then(data => dispatch(getClient(data)))
     .catch(ex => console.log('connection error', ex))
@@ -20,13 +20,14 @@ export function fetchGetClient() {
 export function editClient(client, id) {
   return {
     type: EDIT_CLIENT,
-    payload: [client, id]
+    client: client,
+    id: id
   }
 }
 
 export function fetchEditClient(id, client) {
   return dispatch => {
-    fetch(`https://demo1896123.mockable.io/clients/${id}`, {
+    fetch( process.env.NODE_ENV !== 'production' ? `http://localhost:3004/clients/${id}` : `https://demo1896123.mockable.io/clients/${id}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
