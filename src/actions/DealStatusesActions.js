@@ -9,7 +9,7 @@ export function getDealStatuses(dealStatuses) {
 
 export function fetchGetDealStatuses() {
   return dispatch => {
-    fetch('http://58ea5e779f206f1200b374a8.mockapi.io/dealStatuses')
+    fetch('https://demo1896123.mockable.io/dealStatuses')
     .then(response => response.json())
     .then(data => dispatch(getDealStatuses(data)))
     .catch(ex => console.log('connection error', ex))

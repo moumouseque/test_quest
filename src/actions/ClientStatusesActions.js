@@ -9,7 +9,7 @@ export function getClientStatuses(clientStatuses) {
 
 export function fetchGetClientStatuses() {
   return dispatch => {
-    fetch('http://58ea5e779f206f1200b374a8.mockapi.io/clientStatuses')
+    fetch('https://demo1896123.mockable.io/clientStatuses')
     .then(response => response.json())
     .then(data => dispatch(getClientStatuses(data)))
     .catch(ex => console.log('connection error', ex))

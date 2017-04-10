@@ -9,7 +9,7 @@ export function getActivities(activities) {
 
 export function fetchGetActivities() {
   return dispatch => {
-    fetch('http://58ea5e779f206f1200b374a8.mockapi.io/activities')
+    fetch('https://demo1896123.mockable.io/activities')
     .then(response => response.json())
     .then(data => dispatch(getActivities(data)))
     .catch(ex => console.log('connection error', ex))
